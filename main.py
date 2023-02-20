@@ -19,7 +19,7 @@ class App(tk.Tk):
         self.key_value = tk.StringVar()
         self.input = tk.StringVar()
         self.result_text = tk.StringVar()              
-        self.cript = None 
+        
         self.iconbitmap(default = ICON)  
         self.geometry("280x280")
         self.resizable(False,False)      
@@ -46,11 +46,8 @@ class App(tk.Tk):
               _key = self.key_value.get()
               _input = self.input.get()
               _correctInput = _input.replace('"',"")
-              if(self.cript == None):
-                    self.cript = cript.Cripto(bytes(_key,"utf-8"))
-                    self.cript.encryptFile(_correctInput)
-              else : 
-                  self.cript.encryptFile(_correctInput)             
+              _cript = cript.Cripto(bytes(_key,"utf-8"))
+              _cript.encryptFile(_correctInput)             
               self.result_text.set("File is Encript!")
            except FileNotFoundError:   
             self.result_text.set("File not found in directory!") 
@@ -63,10 +60,8 @@ class App(tk.Tk):
             _input = self.input.get()
             _correctInput = _input.replace('"',"") 
 
-            if(self.cript == None):
-                self.cript = cript.Cripto(bytes(_key,"utf-8"))
-                self.cript.decryptFile(_correctInput)
-            else : self.cript.decryptFile(_correctInput)          
+           _cript = cript.Cripto(bytes(_key,"utf-8"))
+            _cript.decryptFile(_correctInput)          
             self.result_text.set("File is Decript!") 
          except FileNotFoundError:
             self.result_text.set("File not found in directory!")  
